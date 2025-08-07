@@ -1,0 +1,28 @@
+services:
+  drogon:
+    image: drogonframework/drogon
+    container_name: drogon_app
+    ports:
+      - "8080:80"  # localhost:8080 → container:80
+    volumes:
+      - ./drogon_app:/app
+      - ./db:/db
+    working_dir: /app
+      #command: >
+      #bash -c "
+      #mkdir -p build &&
+      #cd build &&
+      #cmake .. &&
+      #make &&
+      # ./url_shortener"
+    depends_on:
+      - sqlite
+
+  sqlite:
+    image: nouchka/sqlite3
+    container_name: sqlite_db
+    volumes:
+      - ./db:/db
+    stdin_open: true
+    tty: true
+
