@@ -1,0 +1,17 @@
+{
+    "rdbms": "sqlite3",
+    "filename": "../db/urls.db",
+    "tables": ["urls"],
+    "convert": {
+      "enabled": false,
+      "items": []
+    },
+    "relationships": {
+      "enabled": false,
+      "items": []
+    },
+    "restful_api_controllers": {
+      "enabled": false
+    }
+  }
+  

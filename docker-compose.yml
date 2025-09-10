@@ -3,18 +3,22 @@ services:
     image: drogonframework/drogon
     container_name: drogon_app
     ports:
-      - "8080:80"  # localhost:8080 → container:80
+      - "6543:6543"
+      - "9876:9876"
+      - "8080:80"
     volumes:
       - ./drogon_app:/app
       - ./db:/db
     working_dir: /app
-      #command: >
-      #bash -c "
-      #mkdir -p build &&
-      #cd build &&
-      #cmake .. &&
-      #make &&
-      # ./url_shortener"
+      #command: tail -f /dev/null
+    command: >
+      bash -c "
+      rm -rf ./build/* &&
+      mkdir -p build &&
+      cd build &&
+      cmake .. &&
+      make &&
+       ./drogon_app"
     depends_on:
       - sqlite
 
@@ -23,6 +27,7 @@ services:
     container_name: sqlite_db
     volumes:
       - ./db:/db
+    working_dir: /db
     stdin_open: true
     tty: true
 
